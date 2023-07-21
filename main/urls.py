@@ -1,11 +1,18 @@
+from rest_framework.routers import DefaultRouter
+from .views import RegisterUserView, RoteiroViewSet
 from django.urls import path
-from . import views
 
-urlpatterns = [ 
-    path("", views.roteirosView, name="roteiros-view"),
-    path("newroteiro", views.newRoteiroView, name="newroteiro-view"),
-    path("roteiro/<int:id>", views.roteirosIdView, name="roteiro-id-view"),
-    path("delete/<int:id>", views.deleteRoteiro, name="delete-roteiro"),
-    path("edit/<int:id>", views.editRoteiro, name="edit-roteiro")
+# Responsável por criar as rotas da API e definir o nome da aplicação que será usado na URL da API (http:// localhost:8000/api/roteiros)
+app_name = "api"
+router = DefaultRouter(
+    trailing_slash=False
+)  # significa que não terá barra no final da URL
+router.register(
+    r"roteiros", RoteiroViewSet
+)  # registra a rota para o viewset RoteiroViewSet
 
+urlpatterns = [
+    path("register/", RegisterUserView.as_view()),
 ]
+
+urlpatterns += router.urls  # define as rotas da API
