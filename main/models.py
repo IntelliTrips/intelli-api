@@ -1,7 +1,7 @@
 from django.db import models
 import openai
 import os
-
+import json
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.Model.list()
 
@@ -42,7 +42,7 @@ class Roteiro(models.Model):
 
     def save(self, *args, **kwargs):
         self.texto_usuario = f"Requisitos: Custo: R${self.custo}, local de partida: {self.partida}, quantidade de pessoas: {self.quantidade_pessoas}, Destino: {self.destino}, período: de {self.data_ida} até {self.data_volta}." 
-        self.resposta_chatgpt = self.gerar_resposta(self.texto_usuario)
+        self.resposta_chatgpt = json.loads(self.gerar_resposta(self.texto_usuario)) 
         super().save(*args, **kwargs) 
 
     def __str__(self):
