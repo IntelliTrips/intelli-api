@@ -8,11 +8,9 @@ router = DefaultRouter(
     trailing_slash=False
 )  # significa que não terá barra no final da URL
 router.register(
-    r"roteiros", RoteiroViewSet
+    r"roteiros", RoteiroViewSet, basename="Roteiro"
 )  # registra a rota para o viewset RoteiroViewSet
 
-urlpatterns = [
-    path("register/", RegisterUserView.as_view()),
-]
+urlpatterns = [path("register/", RegisterUserView.as_view())]
 
 urlpatterns += router.urls  # define as rotas da API
