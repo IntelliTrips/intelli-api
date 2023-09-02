@@ -22,7 +22,7 @@ class Roteiro(models.Model):
     custo = models.FloatField(null=False, blank=False, default=0)
     texto_usuario = models.TextField(null=True, blank=True)
     resposta_chatgpt = models.TextField(null=True, blank=True)
-    data_requisicao = models.DateTimeField(auto_now_add=True)
+    # data_requisicao = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(
         "auth.User", on_delete=models.CASCADE, null=True, blank=True
     )
